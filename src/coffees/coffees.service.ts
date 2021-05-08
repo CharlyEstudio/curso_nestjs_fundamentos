@@ -7,7 +7,9 @@ import { UpdateCoffeeDto }                              from "./dto/update-coffe
 import { Flavor }                                       from "./entities/flavor.entity";
 import { PaginationQueryDto }                           from "../common/dto/pagination-query.dto";
 import { Event }                                        from "../events/entities/event.entity";
-import { COFFEE_BRANDS }                                from "./coffees.constants";
+import { COFFEE_BRANDS }             from "./coffees.constants";
+import { ConfigType } from '@nestjs/config';
+import coffeesConfig from './config/coffees.config';
 
 @Injectable({ scope: Scope.REQUEST }) // Instanciado cuando se usa en un request
 export class CoffeesService {
@@ -18,8 +20,11 @@ export class CoffeesService {
     private readonly flavorRepository: Repository<Flavor>,
     private readonly connection: Connection,
     @Inject(COFFEE_BRANDS) coffeeBrands: string[], // Podemos inyectar datos duros como providers
+    @Inject(coffeesConfig.KEY)
+    private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>,
   ) {
-    console.log('CoffeesService instansiated');
+    console.log(coffeesConfiguration.foo);
+    // console.log('CoffeesService instansiated');
     // console.log(coffeeBrands); // Podemos inyectar datos duros como providers
   }
 

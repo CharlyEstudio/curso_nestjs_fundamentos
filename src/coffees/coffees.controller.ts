@@ -21,13 +21,13 @@ export class CoffeesController {
     private readonly coffeesService: CoffeesService,
     @Inject(REQUEST) private readonly request: Request,
   ) {
-    console.log('CoffeesController created');
-    console.log(request.url);
+    // console.log('CoffeesController created');
+    /*console.log(request.url);
     console.log(request.params);
     console.log(request.body);
     console.log(request.query);
     console.log(request.headers);
-    console.log(request.method);
+    console.log(request.method);*/
   }
 
   @Get('flavors')
