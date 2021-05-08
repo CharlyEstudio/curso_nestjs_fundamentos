@@ -1,14 +1,15 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Coffee }                        from './entities/coffee.entity';
-import { InjectRepository }              from "@nestjs/typeorm";
-import { Connection, Repository }        from 'typeorm';
-import { CreateCoffeeDto }               from "./dto/create-coffee.dto";
-import { UpdateCoffeeDto }               from "./dto/update-coffee.dto";
-import { Flavor }                        from "./entities/flavor.entity";
-import { PaginationQueryDto }            from "../common/dto/pagination-query.dto";
-import { Event }                         from "../events/entities/event.entity";
+import { Inject, Injectable, NotFoundException, Scope } from '@nestjs/common';
+import { Coffee }                                       from './entities/coffee.entity';
+import { InjectRepository }                             from "@nestjs/typeorm";
+import { Connection, Repository }                       from 'typeorm';
+import { CreateCoffeeDto }                              from "./dto/create-coffee.dto";
+import { UpdateCoffeeDto }                              from "./dto/update-coffee.dto";
+import { Flavor }                                       from "./entities/flavor.entity";
+import { PaginationQueryDto }                           from "../common/dto/pagination-query.dto";
+import { Event }                                        from "../events/entities/event.entity";
+import { COFFEE_BRANDS }                                from "./coffees.constants";
 
-@Injectable()
+@Injectable({ scope: Scope.REQUEST }) // Instanciado cuando se usa en un request
 export class CoffeesService {
   constructor(
     @InjectRepository(Coffee)
@@ -16,7 +17,11 @@ export class CoffeesService {
     @InjectRepository(Flavor)
     private readonly flavorRepository: Repository<Flavor>,
     private readonly connection: Connection,
-  ) {}
+    @Inject(COFFEE_BRANDS) coffeeBrands: string[], // Podemos inyectar datos duros como providers
+  ) {
+    console.log('CoffeesService instansiated');
+    // console.log(coffeeBrands); // Podemos inyectar datos duros como providers
+  }
 
   findAll(paginationQuery: PaginationQueryDto) {
     const { limit, offset } = paginationQuery;
