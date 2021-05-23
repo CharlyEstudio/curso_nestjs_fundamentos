@@ -82,4 +82,44 @@ export class CoffeesController {
   remove(@Param('id') id: string) {
     return this.coffeesService.remove(id);
   }
+
+  /*
+   * MongoDB
+   * */
+  @Public() // Decorador genérico para hacer public este path, a pesar que se pida API KEY en todo el aplicativo
+  @Get('/mongo/all')
+  async findAllMongo(
+    @Protocol('https') protocol: string,
+    @Query() paginationQuery: PaginationQueryDto,
+  ) {
+    console.log(protocol);
+    // await new Promise((resolve) => setTimeout(resolve, 5000)); // Para probar el timeout
+    return this.coffeesService.findAllMongo(paginationQuery);
+  }
+
+  @Get('mongo/one/:id')
+  // Manejar los tipos de dato de un param => ParseIntPipe,
+  // pero como ya manejamos uno global, este ya no funciona
+  findOneMongo(@Param('id', ParseIntPipe) id: string) {
+    return this.coffeesService.findOneMongo('' + id);
+  }
+
+  @Post('mongo/save/')
+  createMongo(@Body() createCoffeeDto: CreateCoffeeDto) {
+    return this.coffeesService.createMongo(createCoffeeDto);
+  }
+
+  @Patch('mongo/update/:id')
+  // update(@Param('id') id: string, @Body(ValidationPipe) updateCoffeeDto: UpdateCoffeeDto) { // Podemos validar el cuerpo
+  updateMongo(
+    @Param('id') id: string,
+    @Body(ValidationPipe) updateCoffeeDto: UpdateCoffeeDto,
+  ) {
+    return this.coffeesService.updateMongo(id, updateCoffeeDto);
+  }
+
+  @Delete('mongo/delete/:id')
+  removeMongo(@Param('id') id: string) {
+    return this.coffeesService.removeMongo(id);
+  }
 }
