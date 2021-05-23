@@ -57,7 +57,7 @@ export class CoffeeBrandsFactory {
         // console.log('[!] Async factory');
         // return await connection.query('SELECT * ...');
         // return await Promise.resolve(COFFEE_BRANDS_DATA);
-        console.log(connection.options.type);
+        console.log('Tipo BD', connection.options.type);
         return COFFEE_BRANDS_DATA;
       },
       inject: [Connection],

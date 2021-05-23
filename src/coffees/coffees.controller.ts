@@ -21,7 +21,9 @@ import { REQUEST } from '@nestjs/core';
 import { Request } from 'express';
 import { Public } from '../common/decorators/public.decorator';
 import { Protocol } from '../common/decorators/protocol.decorator';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('coffees')
 // @UsePipes(ValidationPipe)
 // @UsePipes(new ValidationPipe()) // Podemos específicar validaciones únicas
 @Controller('coffees')
@@ -39,6 +41,10 @@ export class CoffeesController {
     console.log(request.method);*/
   }
 
+  @ApiResponse({
+    status: 403,
+    description: 'Forbidden.',
+  })
   // @UsePipes(ValidationPipe) // Podemos validar por método
   @Public() // Decorador genérico para hacer public este path, a pesar que se pida API KEY en todo el aplicativo
   @Get()
