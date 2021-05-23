@@ -14,6 +14,9 @@ import {
 import { Connection } from 'typeorm';
 import { ConfigModule } from '@nestjs/config';
 import coffeesConfig from './config/coffees.config';
+import { MongooseModule } from '@nestjs/mongoose';
+import { CoffeeMongoDB, CoffeeSchema } from './entities/coffee.mongo';
+import { EventMongo, EventSchema } from '../events/schemes/event.schema.ts';
 
 /*class ConfigService {}
 class DevelopmentConfigService {}
@@ -30,6 +33,16 @@ export class CoffeeBrandsFactory {
 @Module({
   imports: [
     TypeOrmModule.forFeature([Coffee, Flavor, Event]),
+    MongooseModule.forFeature([
+      {
+        name: CoffeeMongoDB.name,
+        schema: CoffeeSchema,
+      },
+      {
+        name: EventMongo.name,
+        schema: EventSchema,
+      },
+    ]),
     ConfigModule.forFeature(coffeesConfig),
   ],
   controllers: [CoffeesController],
