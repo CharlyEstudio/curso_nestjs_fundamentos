@@ -1,23 +1,23 @@
 import { Injectable, Module, Scope } from '@nestjs/common';
-import { CoffeesController }         from './coffees.controller';
-import { CoffeesService }            from './coffees.service';
+import { CoffeesController } from './coffees.controller';
+import { CoffeesService } from './coffees.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Coffee }        from "./entities/coffee.entity";
-import { Flavor }        from "./entities/flavor.entity";
-import { Event }         from "../events/entities/event.entity";
+import { Coffee } from './entities/coffee.entity';
+import { Flavor } from './entities/flavor.entity';
+import { Event } from '../events/entities/event.entity';
 import {
   COFFEE_BRANDS,
   COFFEE_BRANDS_DATA,
   COFFEE_BRANDS_FACTORY,
   COFFEE_BRANDS_FACTORY_DB,
-}                        from './coffees.constants';
-import { Connection }    from "typeorm";
-import { ConfigModule }  from "@nestjs/config";
+} from './coffees.constants';
+import { Connection } from 'typeorm';
+import { ConfigModule } from '@nestjs/config';
 import coffeesConfig from './config/coffees.config';
 
-class ConfigService {}
+/*class ConfigService {}
 class DevelopmentConfigService {}
-class ProductionConfigService {}
+class ProductionConfigService {}*/
 
 @Injectable()
 export class CoffeeBrandsFactory {
@@ -54,10 +54,11 @@ export class CoffeeBrandsFactory {
     {
       provide: COFFEE_BRANDS_FACTORY_DB,
       useFactory: async (connection: Connection): Promise<string[]> => {
-        // const coffeeBrands = await connection.query('SELECT * ...');
-        const coffeeBrands = await Promise.resolve(COFFEE_BRANDS_DATA);
         // console.log('[!] Async factory');
-        return coffeeBrands;
+        // return await connection.query('SELECT * ...');
+        // return await Promise.resolve(COFFEE_BRANDS_DATA);
+        console.log(connection.options.type);
+        return COFFEE_BRANDS_DATA;
       },
       inject: [Connection],
     },

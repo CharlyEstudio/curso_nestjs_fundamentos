@@ -23,7 +23,7 @@ export class CoffeesService {
     @Inject(coffeesConfig.KEY)
     private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>,
   ) {
-    console.log(coffeesConfiguration.foo);
+    // console.log(coffeesConfiguration.foo);
     // console.log('CoffeesService instansiated');
     // console.log(coffeeBrands); // Podemos inyectar datos duros como providers
   }
