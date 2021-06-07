@@ -86,7 +86,7 @@ export class CoffeesController {
   /*
    * MongoDB
    * */
-  @Public() // Decorador genérico para hacer public este path, a pesar que se pida API KEY en todo el aplicativo
+  /*@Public() // Decorador genérico para hacer public este path, a pesar que se pida API KEY en todo el aplicativo
   @Get('/mongo/all')
   async findAllMongo(
     @Protocol('https') protocol: string,
@@ -121,5 +121,5 @@ export class CoffeesController {
   @Delete('mongo/delete/:id')
   removeMongo(@Param('id') id: string) {
     return this.coffeesService.removeMongo(id);
-  }
+  }*/
 }

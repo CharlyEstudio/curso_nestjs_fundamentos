@@ -27,12 +27,12 @@ export class CoffeesService {
     @Inject(COFFEE_BRANDS) coffeeBrands: string[], // Podemos inyectar datos duros como providers
     @Inject(coffeesConfig.KEY)
     private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>,
-    @InjectModel(CoffeeMongoDB.name)
+    /*@InjectModel(CoffeeMongoDB.name)
     private readonly coffeeModel: Model<CoffeeMongoDB>,
     @InjectConnection()
     private readonly connMDB: ConnectionMDB,
     @InjectModel(EventMongo.name)
-    private readonly eventModel: Model<EventMongo>,
+    private readonly eventModel: Model<EventMongo>,*/
   ) {
     // console.log(coffeesConfiguration.foo);
     // console.log('CoffeesService instansiated');
@@ -126,7 +126,7 @@ export class CoffeesService {
   /*
    * MongoDB
    * */
-  findAllMongo(paginationQuery: PaginationQueryDto) {
+  /*findAllMongo(paginationQuery: PaginationQueryDto) {
     const { limit, offset } = paginationQuery;
     return this.coffeeModel.find().skip(offset).limit(limit).exec();
   }
@@ -185,5 +185,5 @@ export class CoffeesService {
     } finally {
       session.endSession();
     }
-  }
+  }*/
 }

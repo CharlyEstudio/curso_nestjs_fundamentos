@@ -9,7 +9,7 @@ import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
 import appConfig from './config/app.config';
-import { MongooseModule } from '@nestjs/mongoose';
+// import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
@@ -25,9 +25,9 @@ import { MongooseModule } from '@nestjs/mongoose';
         synchronize: true,
       }),
     }),
-    MongooseModule.forRoot('mongodb://localhost:27017/nest-course', {
+    /*MongooseModule.forRoot('mongodb://localhost:27017/nest-course', {
       useCreateIndex: true,
-    }),
+    }),*/
     ConfigModule.forRoot({
       load: [appConfig],
       validationSchema: Joi.object({

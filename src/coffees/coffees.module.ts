@@ -33,7 +33,7 @@ export class CoffeeBrandsFactory {
 @Module({
   imports: [
     TypeOrmModule.forFeature([Coffee, Flavor, Event]),
-    MongooseModule.forFeature([
+    /*MongooseModule.forFeature([
       {
         name: CoffeeMongoDB.name,
         schema: CoffeeSchema,
@@ -42,7 +42,7 @@ export class CoffeeBrandsFactory {
         name: EventMongo.name,
         schema: EventSchema,
       },
-    ]),
+    ]),*/
     ConfigModule.forFeature(coffeesConfig),
   ],
   controllers: [CoffeesController],
